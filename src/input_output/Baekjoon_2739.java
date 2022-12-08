@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Baekjoon_2742 {
+public class Baekjoon_2739 {
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -12,13 +12,13 @@ public class Baekjoon_2742 {
 		
 		int num = Integer.parseInt(br.readLine());
 		
-		for(int i = num; i > 0; i--) {
-			sb.append(i).append("\n");
+		for(int i = 1; i < 10; i++) {
+			
+			sb.append(num+" * "+i+" = "+(num*i)).append("\n");
+			
 		}
 		
 		System.out.println(sb.toString());
-		br.close();
+		
 	}
-	
-	//sysout보다 stringbuilder가 빠름.
 }

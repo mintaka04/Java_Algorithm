@@ -4,21 +4,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Baekjoon_2742 {
+public class Baekjoon_8393 {
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder();
-		
 		int num = Integer.parseInt(br.readLine());
+		int result = 0;
 		
-		for(int i = num; i > 0; i--) {
-			sb.append(i).append("\n");
+		for(int i = 1; i <= num; i++) {
+			result += i;
 		}
 		
-		System.out.println(sb.toString());
-		br.close();
+		System.out.println(result);
+		
 	}
-	
-	//sysout보다 stringbuilder가 빠름.
 }
