@@ -7,16 +7,22 @@ import java.util.Arrays;
 
 public class Baekjoon_1463 {
 	
-	static int dp[] = new int[1000001];
+	static int dp[];
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		
-		Arrays.fill(dp, -1);
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int num = Integer.parseInt(br.readLine());
-		int result = make_one(num);
 		
-		System.out.println(result);
+		dp = new int[num+1];
+		Arrays.fill(dp, -1);
+		dp[1] = dp[0] = 0;
+			
+		for(int i = 2; i <= num; i++) {
+			make_one(i);
+		}
+		
+		System.out.println(make_one(num));
 				
 	}
 	
@@ -25,23 +31,23 @@ public class Baekjoon_1463 {
 		if(dp[num] != -1) {
 			return dp[num];
 		}
+			
+		if(num%3 == 0 && num%2 == 0) {
+			
+			dp[num] = Math.min(make_one(num-1) + 1, Math.min(make_one(num/3) + 1, make_one(num/2) + 1));			
 		
-		if(num == 1) {
+		}else if(num%3 == 0) {
 			
-			return 0;
+			dp[num] = Math.min(make_one(num-1) + 1, make_one(num/3) + 1);
+		
+		}else if(num%2 == 0) {
 			
+			dp[num] = Math.min(make_one(num-1) + 1, make_one(num/2) + 1);
+		
 		}else {
-			
-			dp[num] = make_one(num-1) + 1;			
-			
-			if(num%3 == 0) {
-				dp[num] = Math.min(dp[num], make_one(num/3) + 1);
-			}
-			if(num%2 == 0) {
-				dp[num] = Math.min(dp[num], make_one(num/2) + 1);
-			}
-			
-			return dp[num];
+			dp[num] = make_one(num-1) + 1;
 		}
+		
+		return dp[num];
 	}
 }
