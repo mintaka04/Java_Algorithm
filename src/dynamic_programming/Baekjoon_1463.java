@@ -23,31 +23,18 @@ public class Baekjoon_1463 {
 			return 0;
 			
 		}else {
-
-			if( num%2 != 0 && num%3 != 0 ) {		//2의 배수도 3의 배수도 아닐때
-				
-				return make_one(num-1) + 1;
 			
-			}else if( num%2 == 0 && num%3 != 0 ) {		//2의 배수이기만 할 때
-				
-				int a = make_one(num/2) + 1;
-				int b = make_one(num-1) + 1;
-				return Math.min(a, b);
-				
-			}else if( num%2 != 0 && num%3 == 0 ) {		//3의 배수이기만 할 때
-				
-				int a = make_one(num/3) + 1;
-				int b = make_one(num-1) + 1;
-				return Math.min(a, b);
-				
-			}else {		//2와 3의 배수일 때
-				
-				int a = make_one(num/3) + 1;
-				int b = make_one(num/2) + 1;
-				int c = make_one(num-1) + 1;				
-				return Math.min(a, Math.min(b, c));
-								
+			int before = make_one(num-1) + 1;			
+			int[] numArrary = {before, before, before};
+			
+			if(num%3 == 0) {
+				numArrary[0] = make_one(num/3) + 1;
 			}
+			if(num%2 == 0) {
+				numArrary[1] = make_one(num/2) + 1;
+			}
+			
+			return Math.min(numArrary[0], Math.min(numArrary[1], numArrary[2]));
 			
 		}
 	}
