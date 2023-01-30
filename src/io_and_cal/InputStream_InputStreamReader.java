@@ -40,7 +40,5 @@ public class InputStream_InputStreamReader {
 		}
 		
 		
-		
-		
 	}
 }
