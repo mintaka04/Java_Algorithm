@@ -3,6 +3,10 @@ package sorting;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 public class BOJ_2108 {
 	
@@ -16,39 +20,43 @@ public class BOJ_2108 {
 		N = Integer.parseInt(br.readLine());
 		arr = new int[N];
 		sorted = new int[N];
-		int sum = 0;
+		double total = 0;
 		
 		for(int i = 0; i < N; i++) {
 			arr[i] = Integer.parseInt(br.readLine());
-			sum += arr[i];
+			total += arr[i];
 		}
 
 		mergeSort(arr, 0, N-1);
 		
-		int mode = 4001; 		//최빈값
-		int value = arr[0]; 	//현재 탐색중인 값
-		int count = 1;			//value가 현재 몇 번 나타나는지
-		int mode_count = 1; 	//현재 최빈값의 빈도
-		boolean flag = false;	//두번째 작은값 체크 flag
+		int mode = 4001;
 		
-		for(int i = 1; i < N; i++) {
-			
-			//다음 값이 현재 value와 같은지 확인
-			//같다면 => count++, mode_count++
-			//다르다면 => value값을 또 바꿔주기.
-			//최빈값... 뭔데 복잡한 것 같지...
+		//<숫자, 횟수> 로 hashmap에 저장
+		HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();		
+		for(int n : arr) hm.put(n, hm.getOrDefault(n, 0) + 1);
+		
+		//가장 큰 횟수 maxTimes에 추출
+		int maxTimes = 0;
+		for(int val : hm.values()) maxTimes = Math.max(maxTimes, val);
+		
+		//value가 maxTimes인 key들 저장
+		List<Integer> list = new ArrayList<>();
+		for(int key : hm.keySet()) {
+			if(hm.get(key) == maxTimes) list.add(key);
 		}
 		
+		if(list.size() > 1) {
+			Collections.sort(list);
+			mode = list.get(1);
+		}else mode = list.get(0);
 		
 		
 		
-		
-		
-		if(sum < 0) sb.append("-");
-		sb.append(Math.round(Math.abs(sum/N)) + "\n");
+		double sum = total/N;
+		sb.append(Math.round(sum) + "\n");
 		
 		sb.append(arr[N/2] + "\n");
-		sb.append(false + "\n");
+		sb.append(mode + "\n");
 		sb.append(arr[N-1] - arr[0]);
 		
 		System.out.println(sb);
